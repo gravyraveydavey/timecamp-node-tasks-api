@@ -3,6 +3,7 @@
 A quick and dirty node.js CLI client for doing some batch operations on your timecamp tasks via the API.
 
 I made this for three main reasons:
+
 1. The dashboard doesn't let you import tasks via a CSV _with_ tags.
 2. The dashboard doesn't let you select multiple tasks at once for archive / deletion.
 3. When you import tasks via CSV you end up with ton's of 3rd level nested tasks called '0' - bug?
@@ -18,7 +19,7 @@ So I essentially wanted to wipe my account clean and start again, scrapping the 
 | -o   | --output [dir]	| create and save json of import API responses to this directory |
 | -b   | --batch 		| batch mode - bypasses input controls! |
 | -k   | --key 			| your API key |
-| -t   | --task [task] 	| specify api task <archive|import|export|delete> |
+| -t   | --task [task] 	| specify api task [archive/import/export/delete] |
 | -d   | --dryrun 		| dry run |
 
 ## Functions
