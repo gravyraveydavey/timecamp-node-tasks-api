@@ -1,0 +1,22 @@
+{
+  "name": "timecamp-api",
+  "version": "1.0.0",
+  "description": "testing timecamp api",
+  "main": "index.js",
+  "scripts": {
+    "test": "timecamp"
+  },
+  "bin": {
+    "timecamp": "./index.js"
+  },
+  "author": "Dave Welch",
+  "license": "ISC",
+  "dependencies": {
+    "co": "^4.6.0",
+    "co-prompt": "^1.0.0",
+    "fs": "0.0.1-security",
+    "jsonfile": "^2.4.0",
+    "request": "^2.76.0",
+    "xml2json": "^0.10.0"
+  }
+}
