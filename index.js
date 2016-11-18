@@ -5,7 +5,6 @@ var jsonfile = require('jsonfile')
 var program = require('commander');
 var co = require('co');
 var prompt = require('co-prompt');
-var xmlparser = require('xml2json');
 
 require('./key.js');
 
