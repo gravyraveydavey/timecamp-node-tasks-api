@@ -43,7 +43,14 @@ switch(program.task){
 	case 'archive':
 		console.log('archiving all tasks...');
 		options.method = 'PUT';
-		archive_request_loop(obj, 0);
+		if (!program.input){
+			console.log('Error: please provide a json file using -i [path_to_file]');
+		} else {
+			var obj = JSON.parse(fs.readFileSync(program.input, 'utf8'));
+			if (obj){
+				archive_request_loop(obj, 0);
+			}
+		}
 		break;
 	case 'export':
 		if (!program.output){
@@ -326,8 +333,7 @@ function archive_request_loop(obj, i){
 			var task = {
 				task_id: obj[i].task_id,
 				name: obj[i].name,
-				archived: "1",
-				tags: 'testing update, updated test'
+				archived: "1"
 			};
 
 			options.form = task;
