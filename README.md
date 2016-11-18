@@ -86,3 +86,5 @@ Create a JSON file of all your projects / tasks / clients as an array of objects
 }]
 ```
 If the client parameter and the name parameter are the same the import script will recognise this as a client, store the task_id from the import response in memory and use it to nest further tasks referencing this client.
+
+I created my json from a directory of clients + projects using a [little crawler script here](https://github.com/gravyraveydavey/finder-crawler-folders-to-json)
