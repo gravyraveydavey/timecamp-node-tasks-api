@@ -15,21 +15,21 @@ So I essentially wanted to wipe my account clean and start again, scrapping the 
 | Flag | Alt            | Description  |
 | -----|----------------| -------------|
 | -i   | --input [file] | Path to .json file |
-| -v   | --verbose 		| enable console logging |
 | -o   | --output [dir]	| create and save json of import API responses to this directory |
 | -b   | --batch 		| batch mode - bypasses input controls! |
 | -k   | --key 			| your API key |
 | -t   | --task [task] 	| specify api task [archive/import/export/delete] |
+| -v   | --verbose 		| enable console logging |
 | -d   | --dryrun 		| dry run |
 
 ## Functions
 
-| Name | Description |
-| ---- | ----------- |
+| Name		   | Description |
+| ------------ | ----------- |
 | Export tasks | does get request, dumps tasks to output .json |
 | Import tasks | loops through a .json file and imports tasks either one by one or in a batch |
-| Archive | loops through a .json and archives tasks either one by one or in a batch |
-| Delete | loops through a .json and moves all archived tasks to a single parent temp task so it can be deleted from the projects interface |
+| Archive	   | loops through a .json and archives tasks either one by one or in a batch |
+| Delete 	   | loops through a .json and moves all archived tasks to a single parent temp task so it can be deleted from the projects interface |
 
 ## Setup
 
@@ -63,6 +63,11 @@ Loops through the input json file, prompting you one by one for each project fou
 You can import the task by responding `y`, skip a task with `n`, inspect the task object with `i`, or quit the script with `q`.
 If you specify an output directory then the response of the import request will be saved and written to an output json. This is useful if you want to access the task_id and other timecamp data from the newly created task.
 `timecamp -t import -i path/to/json/file.json -o path/to/folder/to/save`
+
+You can also run the batch flag to process the entire json file recursively without any prompts.
+`timecamp -t import -i path/to/json/file.json -o path/to/folder/to/save -b`
+Be careful, as this will import **all** the tasks in the json!
+
 
 #### Import format
 
