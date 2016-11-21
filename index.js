@@ -6,8 +6,8 @@ var program = require('commander');
 var co = require('co');
 var prompt = require('co-prompt');
 
-require('./key.js');
 
+eval(fs.readFileSync('key.js')+'');
 var url = "https://www.timecamp.com/third_party/api/tasks/format/json/api_token/" + global.timecamp_api_key;
 
 // Set the headers
