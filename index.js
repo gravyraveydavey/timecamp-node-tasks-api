@@ -8,8 +8,8 @@ var prompt = require('co-prompt');
 
 
 eval(fs.readFileSync('key.js')+'');
-var url = "https://www.timecamp.com/third_party/api/tasks/format/json/api_token/" + global.timecamp_api_key;
-
+var url = "https://www.timecamp.com/third_party/api/tasks/format/json/api_token/" + timecamp_api_key;
+console.log(url);
 // Set the headers
 var headers = {
     'User-Agent':       'Super Agent/0.0.1',
@@ -84,32 +84,40 @@ function get_tasks(){
 	options.method = 'GET';
 	options.headers['Content-Type'] = 'application/json';
 
-	request(options, function (error, response, body) {
-	    if (!error && response.statusCode == 200) {
-	        // prints response to json file
-	        current_projects = JSON.parse(response.body);
-			console.log('got tasks!');
-	        return current_projects;
-	    } else {
-		    console.log('error getting tasks');
-		    console.log('status code: ' + response.statusCode );
-			process.exit();
-	    }
-    });
+	return new Promise(function (fulfill, reject){
+
+		request(options, function (error, response, body) {
+		    if (!error && response.statusCode == 200) {
+		        // prints response to json file
+		        current_projects = JSON.parse(response.body);
+				console.log('got tasks!');
+				fulfill(current_projects);
+		    } else {
+			    console.log('error getting tasks');
+			    console.log('status code: ' + response.statusCode );
+				reject(false);
+				process.exit();
+		    }
+	    });
+
+	});
 }
 
 function export_tasks(){
 	var current_projects = get_tasks();
-	if (current_projects){
-		jsonfile.writeFile(program.output + '/current_projects.json', current_projects, function(err){
-			if (err){
-				console.error(err);
-				process.exit();
-			} else {
-				console.log('successfully exported projects to ' + program.output + '/current_projects.json');
-			}
-		});
-	}
+	current_projects.then(function(val){
+		if (val){
+			jsonfile.writeFile(program.output + '/current_projects.json', val, function(err){
+				if (err){
+					console.error(err);
+					process.exit();
+				} else {
+					console.log('successfully exported projects to ' + program.output + '/current_projects.json');
+				}
+			});
+		} else {
+		}
+	});
 }
 
 function delete_tasks(){
