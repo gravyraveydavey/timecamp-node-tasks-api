@@ -60,7 +60,17 @@ switch(program.task){
 		}
 		break;
 	case 'delete':
-		delete_tasks();
+
+		if (!program.input){
+			var current_projects = get_tasks();
+			current_projects.then(function(val){
+				delete_tasks(val);
+			});
+		} else {
+			var current_projects = JSON.parse(fs.readFileSync(program.input, 'utf8'));
+			delete_tasks(current_projects);
+		}
+
 		break;
 	case 'import':
 		if (!program.input){
@@ -120,15 +130,7 @@ function export_tasks(){
 	});
 }
 
-function delete_tasks(){
-
-	var current_projects = {}
-	if (!program.input){
-		current_projects = get_tasks();
-		// this fails due to callback timing
-	} else {
-		current_projects = JSON.parse(fs.readFileSync(program.input, 'utf8'));
-	}
+function delete_tasks(current_projects){
 
 	if (current_projects){
 		to_be_deleted = []
